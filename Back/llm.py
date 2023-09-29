@@ -6,8 +6,6 @@ from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 
-prompt = "Persona de 25 años de edad, genero masculino, con poliuria, polidipsia, perdida de peso repentina, debilidad, polifagia, candidiasis genital, visión borrosa, picazón."
-
 load_dotenv()
 
 def get_json(prompt:str,gender:str,age:str):
@@ -23,8 +21,8 @@ def get_json(prompt:str,gender:str,age:str):
         Cada una de las entidades debe estar relacionada a los siguientes datos: {data}\
         El paciente es {gender} y tiene {age} años.\
             Devuelveme un diccionario con las entidades y sus datos asociados,\
-                La llave de cada entidad debe ser el nombre de la entidad y el valor debe ser un numero si corresponde, \
-                    o un Yes o No si corresponde. En caso de que sea género debes poner Male o Female.\
+                La llave de cada entidad debe ser el nombre de la entidad y el valor debe ser\
+                    un Yes o No si corresponde. En caso de que sea género debes poner Male o Female.\
                     Siempre debes devolverme un JSON con las respuestas. En caso contrario, poner los datos por defecto: 0, No, Male.
                     """
 

@@ -6,3 +6,6 @@ openai==0.28.1
 python-dotenv==1.0.0
 llama-cpp-python==0.2.7
 fastapi-cors==0.0.6
+pandas==2.1.1
+joblib==1.3.2
+scikit-learn==1.3.1
