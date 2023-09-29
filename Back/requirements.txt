@@ -1,0 +1,7 @@
+fastapi==0.103.2
+uvicorn==0.23.2
+langchain==0.0.304
+python-dotenv==1.0.0
+openai==0.28.1
+python-dotenv==1.0.0
+llama-cpp-python==0.2.7
