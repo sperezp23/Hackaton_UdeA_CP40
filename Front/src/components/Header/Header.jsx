@@ -7,8 +7,7 @@ const Header = () => {
         <img src="../public/Logo.png" alt="LLMed" />
       </figure>
       <h1 className="header__title">
-        Transformando Datos en Diagnósticos: Tu Socio en la Lucha contra la
-        Desinformación.
+        Transformando Datos en Diagnósticos
       </h1>
     </div>
   );
