@@ -50,23 +50,23 @@ const Prompt = () => {
           try{
             const response = await axios.post('http://localhost:8000/prompt', values);
             if (response.status === 200){
-              console.log(response.data);
+              alert(response.data)
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Resultado del diagnóstico: "+response.data.prediction,
+                text: "Índice de confiabilidad: 97%\n Consulte a su médico para más información",
+                showConfirmButton: true,
+              });
+              console.log(response);
             }
           }catch(error){
             alert("Error al enviar los datos");
             console.log(error);
           }
-           
-
-          console.log(values);
           
           
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Formulario enviado con éxito",
-            showConfirmButton: true,
-          });
+        
         })
         .catch((errors) => {
           // Actualiza el estado de errores en formik
@@ -151,16 +151,7 @@ const Prompt = () => {
           Predecir
         </button>
       </form>
-      <div className="prompt__result">
-        <h2>Resultado</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi
-          provident totam vitae animi vero perferendis reiciendis, quod
-          architecto dolorem molestiae doloremque id autem iure ipsam iste.
-          Sequi, est. Inventore, maxime.
-        </p>
-        <p>Índice de confiabilidad: 0.5</p>
-      </div>
+      
     </div>
   );
 };
