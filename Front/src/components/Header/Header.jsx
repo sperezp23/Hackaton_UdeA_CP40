@@ -6,7 +6,9 @@ const Header = () => {
       <figure className="header__logo">
         <img src="https://i.ibb.co/NZbmQmD/Logo.png" alt="LLMed" />
       </figure>
-      <h1 className="header__title">Transformando Datos en Diagnósticos</h1>
+      <h1 className="header__title">
+        Transformando Datos en Diagnósticos Preventivos
+      </h1>
     </div>
   );
 };

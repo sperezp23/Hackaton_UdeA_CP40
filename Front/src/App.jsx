@@ -1,12 +1,15 @@
 import Header from "./components/Header/Header";
 import Prompt from "./components/Prompt/Prompt";
+import { ModalProvider } from "./components/ModalContext/ModalContext";
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Prompt />
-    </div>
+    <ModalProvider>
+      <div>
+        <Header />
+        <Prompt />
+      </div>
+    </ModalProvider>
   );
 };
 
