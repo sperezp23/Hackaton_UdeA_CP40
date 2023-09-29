@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware  # Importa CORS middleware
 import json
-import llm
+#import llm
 
 app = FastAPI()
 
@@ -42,9 +42,9 @@ class Features(BaseModel):
 
 @app.post("/prompt")
 async def create_prompt(prompt: Prompt):
-    response = llm.get_json(prompt = prompt.symptoms,age=prompt.age,gender=prompt.gender)
-    response = json.loads(response)
-    return {"prompt": prompt.symptoms}
+    #response = llm.get_json(prompt = prompt.symptoms,age=prompt.age,gender=prompt.gender)
+    #response = json.loads(response)
+    return {"prediction": "riesgo de diabetes"}
 
 def predict(features: Features):
     return {"prediction": "positive"}

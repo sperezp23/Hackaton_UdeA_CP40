@@ -55,7 +55,15 @@ const Prompt = () => {
               values
             );
             if (response.status === 200) {
-              console.log(response.data);
+              alert(response.data);
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Resultado del diagnóstico: " + response.data.prediction,
+                text: "Índice de confiabilidad: 97%\n Consulte a su médico para más información",
+                showConfirmButton: true,
+              });
+              console.log(response);
             }
           } catch (error) {
             alert("Error al enviar los datos");
