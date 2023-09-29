@@ -129,6 +129,7 @@ const Prompt = () => {
             onChange={formik.handleChange}
             value={formik.values.gender}
           >
+            <option value="">Selecciona un género</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
           </select>
