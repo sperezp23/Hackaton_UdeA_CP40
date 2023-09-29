@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./Prompt.scss";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Prompt = () => {
   const SignupSchema = Yup.object().shape({
@@ -13,6 +14,10 @@ const Prompt = () => {
       .min(2, "Muy Corto!")
       .max(70, "Muy Largo!")
       .required("Olbigatorio"),
+    gender: Yup.string()
+    .min(2, "Muy Corto!")
+    .max(70, "Muy Largo!")
+    .required("Olbigatorio"),
     age: Yup.string() // Cambia a cadena en lugar de número
       .test(
         "is-number",
@@ -33,6 +38,7 @@ const Prompt = () => {
     initialValues: {
       firstName: "",
       lastName: "",
+      gender: "",
       age: "",
       symptoms: "",
     },
@@ -41,8 +47,20 @@ const Prompt = () => {
       await SignupSchema.validate(values, { abortEarly: false })
         .then(async () => {
           // Realiza el envío de datos o cualquier otra acción
+          try{
+            const response = await axios.post('http://localhost:8000/prompt', values);
+            if (response.status === 200){
+              console.log(response.data);
+            }
+          }catch(error){
+            alert("Error al enviar los datos");
+            console.log(error);
+          }
+           
+
           console.log(values);
-          alert(JSON.stringify(values, null, 2));
+          
+          
           Swal.fire({
             position: "center",
             icon: "success",
@@ -88,6 +106,19 @@ const Prompt = () => {
           />
           {formik.errors.lastName && (
             <div className="error">{formik.errors.lastName}</div>
+          )}
+        </div>
+        <div className="form__gender">
+          <label htmlFor="gender">Género: </label>
+          <input
+            id="gender"
+            name="gender"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.gender}
+          />
+          {formik.errors.gender && (
+            <div className="error">{formik.errors.gender}</div>
           )}
         </div>
         <div className="form__age">

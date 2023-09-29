@@ -31,6 +31,7 @@
   &__name,
   &__lastname,
   &__age,
+  &__gender,
   &__symptoms {
     width: 100%;
     display: flex;
@@ -52,6 +53,29 @@
       padding: 5px;
     }
   }
+
+  &__symptoms {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+
+    label {
+      width: 70px;
+      font-weight: 600;
+      height: fit-content;
+    }
+
+    input,
+    textarea {
+      width: 400px;
+      height: 200px;
+      padding: 5px;
+    }
+  }
+
 
   &__submit {
     width: 200px;
