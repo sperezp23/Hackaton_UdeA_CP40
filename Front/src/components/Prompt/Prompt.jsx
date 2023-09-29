@@ -46,7 +46,7 @@ const Prompt = () => {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Formulario enviado con éxito",
+            title: "Síntomas enviados correctamente.",
             showConfirmButton: true,
           });
         })
