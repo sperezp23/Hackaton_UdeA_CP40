@@ -12,8 +12,14 @@
   background: linear-gradient(to bottom, white, #cccccc);
   /* Fija un color de fondo de respaldo en caso de que el degradado no funcione */
   background-color: white;
+  height: 100vh;
   /* Esto asegura que el fondo se extienda por todo el cuerpo de la página */
-  height: 100vh; /* 100% del alto de la ventana */
   margin: 0; /* Elimina el margen predeterminado del cuerpo */
   /* Agrega estilos adicionales si es necesario */
+}
+
+@media only screen and (max-width: 500px) {
+  :root {
+    height: auto;
+  }
 }

@@ -3,8 +3,13 @@ import * as Yup from "yup";
 import "./Prompt.scss";
 import Swal from "sweetalert2";
 import axios from "axios";
+import Modal from "../Modal/Modal";
+import { useModalContext } from "../ModalContext/ModalContext";
 
 const Prompt = () => {
+  // Define un estado para controlar la visibilidad del modal
+  const { modalVisible, setModalVisible } = useModalContext();
+
   const SignupSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(2, "Muy Corto!")
@@ -14,10 +19,7 @@ const Prompt = () => {
       .min(2, "Muy Corto!")
       .max(70, "Muy Largo!")
       .required("Olbigatorio"),
-    gender: Yup.string()
-    .min(2, "Muy Corto!")
-    .max(70, "Muy Largo!")
-    .required("Olbigatorio"),
+    gender: Yup.string().required("Olbigatorio"),
     age: Yup.string() // Cambia a cadena en lugar de número
       .test(
         "is-number",
@@ -47,26 +49,29 @@ const Prompt = () => {
       await SignupSchema.validate(values, { abortEarly: false })
         .then(async () => {
           // Realiza el envío de datos o cualquier otra acción
-          try{
-            const response = await axios.post('http://localhost:8000/prompt', values);
-            if (response.status === 200){
+          try {
+            const response = await axios.post(
+              "http://localhost:8000/prompt",
+              values
+            );
+            if (response.status === 200) {
               console.log(response.data);
             }
-          }catch(error){
+          } catch (error) {
             alert("Error al enviar los datos");
             console.log(error);
           }
-           
 
           console.log(values);
-          
-          
+
           Swal.fire({
             position: "center",
             icon: "success",
             title: "Síntomas enviados correctamente.",
             showConfirmButton: true,
           });
+
+          setModalVisible(true);
         })
         .catch((errors) => {
           // Actualiza el estado de errores en formik
@@ -110,13 +115,15 @@ const Prompt = () => {
         </div>
         <div className="form__gender">
           <label htmlFor="gender">Género: </label>
-          <input
-            id="gender"
+          <select
             name="gender"
-            type="text"
+            id="gender"
             onChange={formik.handleChange}
             value={formik.values.gender}
-          />
+          >
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
           {formik.errors.gender && (
             <div className="error">{formik.errors.gender}</div>
           )}
@@ -151,16 +158,7 @@ const Prompt = () => {
           Predecir
         </button>
       </form>
-      <div className="prompt__result">
-        <h2>Resultado</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi
-          provident totam vitae animi vero perferendis reiciendis, quod
-          architecto dolorem molestiae doloremque id autem iure ipsam iste.
-          Sequi, est. Inventore, maxime.
-        </p>
-        <p>Índice de confiabilidad: 0.5</p>
-      </div>
+      {modalVisible && <Modal />}
     </div>
   );
 };
