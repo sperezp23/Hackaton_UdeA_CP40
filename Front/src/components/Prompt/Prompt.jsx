@@ -49,29 +49,17 @@ const Prompt = () => {
       await SignupSchema.validate(values, { abortEarly: false })
         .then(async () => {
           // Realiza el envío de datos o cualquier otra acción
-<<<<<<< HEAD
           try {
             const response = await axios.post(
               "http://localhost:8000/prompt",
               values
             );
             if (response.status === 200) {
-              alert(response.data);
               Swal.fire({
                 position: "center",
                 icon: "success",
                 title: "Resultado del diagnóstico: " + response.data.prediction,
-                text: "Índice de confiabilidad: 97%\n Consulte a su médico para más información",
-=======
-          try{
-            const response = await axios.post('http://localhost:8000/prompt', values);
-            if (response.status === 200){
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Resultado del diagnóstico: "+response.data.prediction,
                 text: "Índice de confiabilidad: 89.65%\n",
->>>>>>> b869de1 (App working end-to-end)
                 showConfirmButton: true,
               });
               console.log(response);
