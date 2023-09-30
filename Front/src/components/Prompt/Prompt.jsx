@@ -69,14 +69,6 @@ const Prompt = () => {
             console.log(error);
           }
 
-          console.log(values);
-
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Síntomas enviados correctamente.",
-            showConfirmButton: true,
-          });
 
           setModalVisible(true);
         })
