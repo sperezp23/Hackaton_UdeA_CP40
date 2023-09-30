@@ -53,7 +53,7 @@ const Prompt = () => {
           // Realiza el envío de datos o cualquier otra acción
           try {
             const response = await axios.post(
-              "http://localhost:8000/prompt",
+              "https://llmed-jdjvk55zcq-uc.a.run.app/prompt",
               values
             );
             if (response.status === 200) {
