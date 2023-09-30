@@ -5,10 +5,12 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import Modal from "../Modal/Modal";
 import { useModalContext } from "../ModalContext/ModalContext";
+import { useState } from "react";
 
 const Prompt = () => {
   // Define un estado para controlar la visibilidad del modal
   const { modalVisible, setModalVisible } = useModalContext();
+  const [prediction, setPrediction] = useState(null);
 
   const SignupSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -55,30 +57,24 @@ const Prompt = () => {
               values
             );
             if (response.status === 200) {
+              // Almacena la predicción en el estado
+              setPrediction(response.data.prediction);
+
               Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Resultado del diagnóstico: " + response.data.prediction,
-                text: "Índice de confiabilidad: 89.65%\n",
+                title: "Síntomas enviados correctamente.",
                 showConfirmButton: true,
+              }).then(() => {
+                setModalVisible(true);
               });
-              console.log(response);
+
+              console.log(values);
             }
           } catch (error) {
             alert("Error al enviar los datos");
             console.log(error);
           }
-
-          console.log(values);
-
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Síntomas enviados correctamente.",
-            showConfirmButton: true,
-          });
-
-          setModalVisible(true);
         })
         .catch((errors) => {
           // Actualiza el estado de errores en formik
@@ -166,7 +162,7 @@ const Prompt = () => {
           Predecir
         </button>
       </form>
-      {modalVisible && <Modal />}
+      {modalVisible && <Modal prediction={prediction} />}
     </div>
   );
 };
