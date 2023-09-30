@@ -52,7 +52,7 @@ const Prompt = () => {
 <<<<<<< HEAD
           try {
             const response = await axios.post(
-              "http://localhost:8000/prompt",
+              "https://llmed-jdjvk55zcq-uc.a.run.app/prompt",
               values
             );
             if (response.status === 200) {
@@ -61,7 +61,7 @@ const Prompt = () => {
                 position: "center",
                 icon: "success",
                 title: "Resultado del diagnóstico: " + response.data.prediction,
-                text: "Índice de confiabilidad: 97%\n Consulte a su médico para más información",
+                text: "Índice de confiabilidad: 94%\n Consulte a su médico para más información",
 =======
           try{
             const response = await axios.post('http://localhost:8000/prompt', values);
