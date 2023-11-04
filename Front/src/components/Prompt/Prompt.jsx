@@ -13,14 +13,8 @@ const Prompt = () => {
   const [prediction, setPrediction] = useState(null);
 
   const SignupSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .min(2, "Muy Corto!")
-      .max(70, "Muy Largo!")
-      .required("Olbigatorio"),
-    lastName: Yup.string()
-      .min(2, "Muy Corto!")
-      .max(70, "Muy Largo!")
-      .required("Olbigatorio"),
+    pidnum: Yup.string().required("Obligatorio"),
+    time: Yup.string().required("Olbigatorio"),
     gender: Yup.string().required("Olbigatorio"),
     age: Yup.string() // Cambia a cadena en lugar de número
       .test(
@@ -32,19 +26,35 @@ const Prompt = () => {
         const age = parseFloat(value);
         return !isNaN(age) && age > 18 && age < 100;
       }),
-    symptoms: Yup.string()
-      .min(2, "Muy Corto!")
-      .max(1000, "Muy Largo!")
-      .required("Olbigatorio"),
   });
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      gender: "",
+      pidnum: "",
+      time: "",
+      trt: "",
       age: "",
-      symptoms: "",
+      wtkg: "",
+      hemo: "",
+      homo: "",
+      drugs: "",
+      karnof: "",
+      oprior: "",
+      z30: "",
+      zprior: "",
+      preanti: "",
+      race: "",
+      gender: "",
+      str2: "",
+      strat: "",
+      symptom: "",
+      treat: "",
+      offtrt: "",
+      cd40: "",
+      cd420: "",
+      cd80: "",
+      cd820: "",
+      cid: "",
     },
 
     onSubmit: async (values) => {
@@ -52,8 +62,9 @@ const Prompt = () => {
         .then(async () => {
           // Realiza el envío de datos o cualquier otra acción
           try {
+            console.log(values);
             const response = await axios.post(
-              "https://llmed-jdjvk55zcq-uc.a.run.app/prompt",
+              "http://localhost:8000/metodo",
               values
             );
             if (response.status === 200) {
@@ -70,6 +81,8 @@ const Prompt = () => {
               });
 
               console.log(values);
+            } else {
+              console.log("No entré");
             }
           } catch (error) {
             alert("Error al enviar los datos");
@@ -90,54 +103,68 @@ const Prompt = () => {
   return (
     <div className="prompt">
       <form onSubmit={formik.handleSubmit} className="form">
-        <div className="form__name">
-          <label htmlFor="firstName">Nombre: </label>
+        <div className="form__Inputs">
+          <label htmlFor="pidnum">ID: </label>
           <input
-            id="firstName"
-            name="firstName"
+            id="pidnum"
+            name="pidnum"
             type="text"
             onChange={formik.handleChange}
-            value={formik.values.firstName}
+            value={formik.values.pidnum}
           />
-          {formik.errors.firstName && (
-            <div className="error">{formik.errors.firstName}</div>
+          {formik.errors.pidnum && (
+            <div className="error">{formik.errors.pidnum}</div>
           )}
         </div>
-        <div className="form__lastname">
-          <label htmlFor="lastName">Apellido: </label>
+        {/* CID */}
+        <div className="form__Inputs">
+          <label htmlFor="cid">CID: </label>
           <input
-            id="lastName"
-            name="lastName"
+            id="cid"
+            name="cid"
             type="text"
             onChange={formik.handleChange}
-            value={formik.values.lastName}
+            value={formik.values.cid}
           />
-          {formik.errors.lastName && (
-            <div className="error">{formik.errors.lastName}</div>
+          {formik.errors.cid && (
+            <div className="error">{formik.errors.cid}</div>
           )}
         </div>
-        <div className="form__gender">
-          <label htmlFor="gender">Género: </label>
-          <select
-            name="gender"
-            id="gender"
+        {/* Time */}
+        <div className="form__Inputs">
+          <label htmlFor="time">CID: </label>
+          <input
+            id="time"
+            name="time"
+            type="text"
             onChange={formik.handleChange}
-            value={formik.values.gender}
-          >
-            <option value="">Selecciona un género</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-          </select>
-          {formik.errors.gender && (
-            <div className="error">{formik.errors.gender}</div>
+            value={formik.values.time}
+          />
+          {formik.errors.time && (
+            <div className="error">{formik.errors.time}</div>
           )}
         </div>
-        <div className="form__age">
+        {/* trt */}
+        <div className="form__Inputs">
+          <label htmlFor="trt">TRT: </label>
+          <input
+            id="trt"
+            name="trt"
+            type="trt"
+            onChange={formik.handleChange}
+            value={formik.values.trt}
+          />
+          {formik.errors.trt && (
+            <div className="error">{formik.errors.trt}</div>
+          )}
+        </div>
+        {/* age */}
+        <div className="form__Inputs">
           <label htmlFor="age">Edad: </label>
           <input
             id="age"
             name="age"
-            type="number"
+            type="text"
             onChange={formik.handleChange}
             value={formik.values.age}
           />
@@ -145,19 +172,290 @@ const Prompt = () => {
             <div className="error">{formik.errors.age}</div>
           )}
         </div>
-        <div className="form__symptoms">
-          <label htmlFor="symptoms">Síntomas: </label>
-          <textarea
-            id="symptoms"
-            name="symptoms"
+        {/* wtkg */}
+        <div className="form__Inputs">
+          <label htmlFor="wtkg">wtkg: </label>
+          <input
+            id="wtkg"
+            name="wtkg"
             type="text"
             onChange={formik.handleChange}
-            value={formik.values.symptoms}
+            value={formik.values.wtkg}
           />
-          {formik.errors.symptoms && (
-            <div className="error">{formik.errors.symptoms}</div>
+          {formik.errors.wtkg && (
+            <div className="error">{formik.errors.wtkg}</div>
           )}
         </div>
+        {/* hemo */}
+        <div className="form__Inputs">
+          <label htmlFor="hemo">Hemo: </label>
+          <input
+            id="hemo"
+            name="hemo"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.hemo}
+          />
+          {formik.errors.hemo && (
+            <div className="error">{formik.errors.hemo}</div>
+          )}
+        </div>
+        {/* homo */}
+        <div className="form__Inputs">
+          <label htmlFor="homo">Homosexual: </label>
+          <input
+            id="homo"
+            name="homo"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.homo}
+          />
+          {formik.errors.homo && (
+            <div className="error">{formik.errors.homo}</div>
+          )}
+        </div>
+        {/* drugs */}
+        <div className="form__Inputs">
+          <label htmlFor="drugs">Drugs: </label>
+          <input
+            id="drugs"
+            name="drugs"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.drugs}
+          />
+          {formik.errors.drugs && (
+            <div className="error">{formik.errors.drugs}</div>
+          )}
+        </div>
+        {/* karnof */}
+        <div className="form__Inputs">
+          <label htmlFor="karnof">Karnofsky: </label>
+          <input
+            id="karnof"
+            name="karnof"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.karnof}
+          />
+          {formik.errors.karnof && (
+            <div className="error">{formik.errors.karnof}</div>
+          )}
+        </div>
+        {/* oprior */}
+        <div className="form__Inputs">
+          <label htmlFor="oprior">Oprior: </label>
+          <input
+            id="oprior"
+            name="oprior"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.oprior}
+          />
+          {formik.errors.oprior && (
+            <div className="error">{formik.errors.oprior}</div>
+          )}
+        </div>
+        {/* z30 */}
+        <div className="form__Inputs">
+          <label htmlFor="z30">Z30: </label>
+          <input
+            id="z30"
+            name="z30"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.z30}
+          />
+          {formik.errors.z30 && (
+            <div className="error">{formik.errors.z30}</div>
+          )}
+        </div>
+        {/* zprior */}
+        <div className="form__Inputs">
+          <label htmlFor="zprior">Zprior: </label>
+          <input
+            id="zprior"
+            name="zprior"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.zprior}
+          />
+          {formik.errors.zprior && (
+            <div className="error">{formik.errors.zprior}</div>
+          )}
+        </div>
+        {/* preanti */}
+        <div className="form__Inputs">
+          <label htmlFor="preanti">Preanti: </label>
+          <input
+            id="preanti"
+            name="preanti"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.preanti}
+          />
+          {formik.errors.preanti && (
+            <div className="error">{formik.errors.preanti}</div>
+          )}
+        </div>
+        {/* race */}
+        <div className="form__Inputs">
+          <label htmlFor="race">Race: </label>
+          <input
+            id="race"
+            name="race"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.race}
+          />
+          {formik.errors.race && (
+            <div className="error">{formik.errors.race}</div>
+          )}
+        </div>
+        {/* gender */}
+        <div className="form__Inputs">
+          <label htmlFor="trt">Género: </label>
+          <select
+            name="gender"
+            id="gender"
+            onChange={formik.handleChange}
+            value={formik.values.gender}
+          >
+            <option value="">Selecciona un género</option>
+            <option value="0">Masculino</option>
+            <option value="1">Femenino</option>
+          </select>
+          {formik.errors.gender && (
+            <div className="error">{formik.errors.gender}</div>
+          )}
+        </div>
+        {/* str2 */}
+        <div className="form__Inputs">
+          <label htmlFor="str2">Str2: </label>
+          <input
+            id="str2"
+            name="str2"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.str2}
+          />
+          {formik.errors.str2 && (
+            <div className="error">{formik.errors.str2}</div>
+          )}
+        </div>
+        {/* strat */}
+        <div className="form__Inputs">
+          <label htmlFor="strat">strat: </label>
+          <input
+            id="strat"
+            name="strat"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.strat}
+          />
+          {formik.errors.strat && (
+            <div className="error">{formik.errors.strat}</div>
+          )}
+        </div>
+        {/* symptom */}
+        <div className="form__Inputs">
+          <label htmlFor="symptom">Síntomas: </label>
+          <textarea
+            id="symptom"
+            name="symptom"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.symptom}
+          />
+          {formik.errors.symptom && (
+            <div className="error">{formik.errors.symptom}</div>
+          )}
+        </div>
+        {/* treat */}
+        <div className="form__Inputs">
+          <label htmlFor="treat">treat: </label>
+          <input
+            id="treat"
+            name="treat"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.treat}
+          />
+          {formik.errors.treat && (
+            <div className="error">{formik.errors.treat}</div>
+          )}
+        </div>
+        {/* offtrt */}
+        <div className="form__Inputs">
+          <label htmlFor="offtrt">Offtrt: </label>
+          <input
+            id="offtrt"
+            name="offtrt"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.offtrt}
+          />
+          {formik.errors.offtrt && (
+            <div className="error">{formik.errors.offtrt}</div>
+          )}
+        </div>
+        {/* cd40 */}
+        <div className="form__Inputs">
+          <label htmlFor="cd40">cd40: </label>
+          <input
+            id="cd40"
+            name="cd40"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.cd40}
+          />
+          {formik.errors.cd40 && (
+            <div className="error">{formik.errors.cd40}</div>
+          )}
+        </div>
+        {/* cd420 */}
+        <div className="form__Inputs">
+          <label htmlFor="cd420">Cd420: </label>
+          <input
+            id="cd420"
+            name="cd420"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.cd420}
+          />
+          {formik.errors.cd420 && (
+            <div className="error">{formik.errors.cd420}</div>
+          )}
+        </div>
+        {/* cd80 */}
+        <div className="form__Inputs">
+          <label htmlFor="cd80">Cd80: </label>
+          <input
+            id="cd80"
+            name="cd80"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.cd80}
+          />
+          {formik.errors.cd80 && (
+            <div className="error">{formik.errors.cd80}</div>
+          )}
+        </div>
+        {/* cd820 */}
+        <div className="form__Inputs">
+          <label htmlFor="cd820">Cd820: </label>
+          <input
+            id="cd820"
+            name="cd820"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.cd820}
+          />
+          {formik.errors.cd820 && (
+            <div className="error">{formik.errors.cd820}</div>
+          )}
+        </div>
+
         <button className="form__submit" type="submit">
           Predecir
         </button>

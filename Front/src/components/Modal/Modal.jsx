@@ -13,7 +13,7 @@ const Modal = (props) => {
     <div className="modal">
       <h2>Resultado</h2>
       <p className="modal__result">Predicción: {props.prediction}</p>
-      <p className="modal__result--indice">Índice de confiabilidad: 89.65%</p>
+      {/* <p className="modal__result--indice">Índice de confiabilidad: 89.65%</p> */}
       <button onClick={handleCloseModal} className="modal__close">
         Cerrar
       </button>
